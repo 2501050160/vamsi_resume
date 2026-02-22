@@ -318,18 +318,23 @@ export default function App() {
               </motion.div>
 
               <motion.div 
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="relative"
+                initial={{ opacity: 0, scale: 0.5, rotate: -10 }}
+                animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                transition={{ 
+                  type: "spring",
+                  stiffness: 100,
+                  damping: 15,
+                  delay: 0.4 
+                }}
+                className="relative flex justify-center"
               >
-                <div className={`aspect-square rounded-3xl shadow-2xl p-4 flex flex-col justify-center items-center relative overflow-hidden group transition-colors duration-500 ${darkMode ? 'bg-slate-900 border border-slate-800' : 'bg-white'}`}>
-                  <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className={`w-64 h-64 md:w-80 md:h-80 rounded-full shadow-2xl p-3 flex flex-col justify-center items-center relative transition-colors duration-500 ${darkMode ? 'bg-slate-900 border-2 border-emerald-500/30' : 'bg-white border-2 border-emerald-100'}`}>
+                  <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-transparent rounded-full" />
                   
                   {/* Author Photo with Animation */}
                   <motion.div 
                     whileHover={{ scale: 1.05 }}
-                    className="w-full h-full rounded-2xl overflow-hidden relative z-10"
+                    className="w-full h-full rounded-full overflow-hidden relative z-10 border-4 border-transparent group"
                   >
                     <img 
                       src="/images/profile.jpeg" 
@@ -337,39 +342,35 @@ export default function App() {
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                       referrerPolicy="no-referrer"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-emerald-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                   </motion.div>
                   
                   {/* Floating Stats */}
                   <motion.div 
-                    animate={{ y: [0, -10, 0] }}
-                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                    className={`absolute top-6 right-6 shadow-lg rounded-2xl p-4 border transition-colors duration-500 z-20 ${darkMode ? 'bg-slate-800 border-slate-700' : 'bg-white border-slate-50'}`}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 1, duration: 0.6 }}
+                    className={`absolute -top-4 -right-4 shadow-xl rounded-2xl p-3 border transition-colors duration-500 z-20 ${darkMode ? 'bg-slate-800 border-slate-700' : 'bg-white border-slate-50'}`}
                   >
-                    <div className="flex items-center gap-3">
-                      <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${darkMode ? 'bg-blue-900/30 text-blue-400' : 'bg-blue-50 text-blue-600'}`}>
-                        <Settings size={20} />
+                    <div className="flex items-center gap-2">
+                      <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${darkMode ? 'bg-blue-900/30 text-blue-400' : 'bg-blue-50 text-blue-600'}`}>
+                        <Settings size={16} />
                       </div>
-                      <div>
-                        <p className="text-xs text-slate-400 font-bold uppercase">Experience</p>
-                        <p className={`text-sm font-bold ${darkMode ? 'text-white' : 'text-slate-900'}`}>1 Year GET</p>
-                      </div>
+                      <p className={`text-xs font-bold ${darkMode ? 'text-white' : 'text-slate-900'}`}>1Y GET</p>
                     </div>
                   </motion.div>
 
                   <motion.div 
-                    animate={{ y: [0, 10, 0] }}
-                    transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                    className={`absolute bottom-6 left-6 shadow-lg rounded-2xl p-4 border transition-colors duration-500 z-20 ${darkMode ? 'bg-slate-800 border-slate-700' : 'bg-white border-slate-50'}`}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 1.2, duration: 0.6 }}
+                    className={`absolute -bottom-4 -left-4 shadow-xl rounded-2xl p-3 border transition-colors duration-500 z-20 ${darkMode ? 'bg-slate-800 border-slate-700' : 'bg-white border-slate-50'}`}
                   >
-                    <div className="flex items-center gap-3">
-                      <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${darkMode ? 'bg-amber-900/30 text-amber-400' : 'bg-amber-50 text-amber-600'}`}>
-                        <Award size={20} />
+                    <div className="flex items-center gap-2">
+                      <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${darkMode ? 'bg-amber-900/30 text-amber-400' : 'bg-amber-50 text-amber-600'}`}>
+                        <Award size={16} />
                       </div>
-                      <div>
-                        <p className="text-xs text-slate-400 font-bold uppercase">CGPA</p>
-                        <p className={`text-sm font-bold ${darkMode ? 'text-white' : 'text-slate-900'}`}>8.5 / 10</p>
-                      </div>
+                      <p className={`text-xs font-bold ${darkMode ? 'text-white' : 'text-slate-900'}`}>8.5 CGPA</p>
                     </div>
                   </motion.div>
                 </div>
@@ -686,3 +687,695 @@ export default function App() {
   </div>
   );
 }
+
+
+
+
+// /**
+//  * @license
+//  * SPDX-License-Identifier: Apache-2.0
+//  */
+
+// import React, { useState, useEffect } from 'react';
+// import { motion, AnimatePresence } from 'motion/react';
+// import { 
+//   Mail, 
+//   Phone, 
+//   Linkedin, 
+//   MapPin, 
+//   Download, 
+//   ExternalLink, 
+//   ChevronRight, 
+//   Award, 
+//   BookOpen, 
+//   Briefcase, 
+//   Cpu, 
+//   Layers, 
+//   Settings,
+//   CheckCircle2,
+//   Menu,
+//   X,
+//   ArrowRight
+// } from 'lucide-react';
+
+// // --- Types ---
+// interface Project {
+//   title: string;
+//   description: string;
+//   tools: string[];
+//   year: string;
+//   category: string;
+// }
+
+// interface Experience {
+//   role: string;
+//   company: string;
+//   period: string;
+//   description: string[];
+// }
+
+// interface Education {
+//   degree: string;
+//   institution: string;
+//   period: string;
+//   score: string;
+// }
+
+// // --- Data ---
+// const PROJECTS: Project[] = [
+//   {
+//     title: "Biodegradable Polymer Research (PBAT & PLA)",
+//     description: "Advanced research on PBAT and PLA chemicals to enhance durability and mechanical strength of biodegradable materials. Developed a solution that replaces inefficient paper bags and harmful plastics with high-efficiency, eco-friendly alternatives.",
+//     tools: ["Material Science", "Chemical Research", "Sustainability"],
+//     year: "2024-2025",
+//     category: "Research & Development"
+//   },
+//   {
+//     title: "Multi-Purpose Sieving Machine",
+//     description: "Designed and fabricated a flexible sieving machine with interchangeable meshes for various industrial operations. Features a high-speed motor and circular disc mechanism for efficient material separation.",
+//     tools: ["AutoCAD", "Fabrication", "Mechanical Design"],
+//     year: "2022",
+//     category: "Mechanical Design"
+//   }
+// ];
+
+// const EXPERIENCE: Experience[] = [
+//   {
+//     role: "Graduate Engineering Trainee (GET) - Quality Assurance",
+//     company: "Current Organization",
+//     period: "2024 - Present (1 Year)",
+//     description: [
+//       "Specializing in Quality Assurance (QA) processes and standards.",
+//       "Implementing rigorous quality control protocols to ensure product excellence.",
+//       "Collaborating with cross-functional teams to optimize manufacturing efficiency.",
+//       "Analyzing production data to identify and resolve quality bottlenecks."
+//     ]
+//   },
+//   {
+//     role: "Industrial Intern",
+//     company: "RINL Steel Plant",
+//     period: "6 Months (2019)",
+//     description: [
+//       "Gained hands-on experience with industrial drilling machines and manufacturing processes.",
+//       "Assisted in maintenance and operation of heavy machinery in a steel plant environment."
+//     ]
+//   },
+//   {
+//     role: "AEP Intern (Heat Exchangers)",
+//     company: "AEP",
+//     period: "1 Month (2024)",
+//     description: [
+//       "Designed and drafted critical components: Baffle Plates, Dish Ends, Nozzles, and Saddle Supports.",
+//       "Utilized CAD software for precise engineering documentation."
+//     ]
+//   },
+//   {
+//     role: "Drone Technologies Intern",
+//     company: "AU-ICDT, Andhra University",
+//     period: "1 Month (2024)",
+//     description: [
+//       "Explored cutting-edge aerial technologies and drone assembly.",
+//       "Gained practical insights into flight dynamics and drone applications."
+//     ]
+//   }
+// ];
+
+// const EDUCATION: Education[] = [
+//   {
+//     degree: "Bachelor of Mechanical Engineering",
+//     institution: "Vignan Institute of Information Technology, Visakhapatnam",
+//     period: "2022 - 2025",
+//     score: "8.5 / 10 CGPA"
+//   },
+//   {
+//     degree: "Diploma in Mechanical Engineering",
+//     institution: "DR.B.R.A.G.M.R. Polytechnic, Rajahmundry",
+//     period: "2019 - 2022",
+//     score: "82.4%"
+//   },
+//   {
+//     degree: "Matriculation",
+//     institution: "Master Mind’s English Medium High School, Visakhapatnam",
+//     period: "2018 - 2019",
+//     score: "9.7 / 10 CGPA"
+//   }
+// ];
+
+// const SKILLS = {
+//   technical: ["AutoCAD", "CATIA", "HTML Basics", "Quality Assurance", "Advanced Machining", "Material Science"],
+//   soft: ["Project Management", "Teamwork", "Leadership", "Time Management", "Effective Communication"]
+// };
+
+// // --- Components ---
+
+// const SectionHeading = ({ children, subtitle, isDark }: { children: React.ReactNode, subtitle?: string, isDark?: boolean }) => (
+//   <div className="mb-12">
+//     <motion.h2 
+//       initial={{ opacity: 0, y: 20 }}
+//       whileInView={{ opacity: 1, y: 0 }}
+//       viewport={{ once: true }}
+//       className={`text-3xl md:text-4xl font-bold mb-2 tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}
+//     >
+//       {children}
+//     </motion.h2>
+//     {subtitle && (
+//       <motion.p 
+//         initial={{ opacity: 0, y: 10 }}
+//         whileInView={{ opacity: 1, y: 0 }}
+//         viewport={{ once: true }}
+//         transition={{ delay: 0.1 }}
+//         className={`${isDark ? 'text-emerald-400' : 'text-slate-500'} font-medium uppercase tracking-widest text-xs`}
+//       >
+//         {subtitle}
+//       </motion.p>
+//     )}
+//     <motion.div 
+//       initial={{ width: 0 }}
+//       whileInView={{ width: 60 }}
+//       viewport={{ once: true }}
+//       transition={{ delay: 0.2, duration: 0.8 }}
+//       className="h-1 bg-emerald-500 mt-4 rounded-full"
+//     />
+//   </div>
+// );
+
+// const Navbar = ({ darkMode, setDarkMode }: { darkMode: boolean, setDarkMode: (v: boolean) => void }) => {
+//   const [isScrolled, setIsScrolled] = useState(false);
+//   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+//   useEffect(() => {
+//     const handleScroll = () => setIsScrolled(window.scrollY > 50);
+//     window.addEventListener('scroll', handleScroll);
+//     return () => window.removeEventListener('scroll', handleScroll);
+//   }, []);
+
+//   const navLinks = [
+//     { name: 'About', href: '#about' },
+//     { name: 'Experience', href: '#experience' },
+//     { name: 'Projects', href: '#projects' },
+//     { name: 'Education', href: '#education' },
+//     { name: 'Contact', href: '#contact' },
+//   ];
+
+//   return (
+//     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? (darkMode ? 'bg-slate-900/80 backdrop-blur-md shadow-lg py-4' : 'bg-white/80 backdrop-blur-md shadow-sm py-4') : 'bg-transparent py-6'}`}>
+//       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
+//         <motion.div 
+//           initial={{ opacity: 0, x: -20 }}
+//           animate={{ opacity: 1, x: 0 }}
+//           className={`text-xl font-bold tracking-tighter ${darkMode ? 'text-white' : 'text-slate-900'}`}
+//         >
+//           VK<span className="text-emerald-500">.</span>
+//         </motion.div>
+
+//         {/* Desktop Nav */}
+//         <div className="hidden md:flex items-center space-x-8">
+//           {navLinks.map((link) => (
+//             <a 
+//               key={link.name} 
+//               href={link.href}
+//               className={`text-sm font-medium transition-colors ${darkMode ? 'text-slate-300 hover:text-emerald-400' : 'text-slate-600 hover:text-emerald-600'}`}
+//             >
+//               {link.name}
+//             </a>
+//           ))}
+          
+//           <button 
+//             onClick={() => setDarkMode(!darkMode)}
+//             className={`p-2 rounded-full transition-all hover:scale-110 active:scale-95 ${darkMode ? 'bg-slate-800 text-amber-400 hover:bg-slate-700' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}`}
+//             aria-label="Toggle Dark Mode"
+//           >
+//             {darkMode ? <Cpu size={20} /> : <Settings size={20} />}
+//           </button>
+
+//           <button className={`px-5 py-2 rounded-full text-sm font-medium transition-all shadow-lg hover:scale-105 active:scale-95 ${darkMode ? 'bg-emerald-600 text-white hover:bg-emerald-500 shadow-emerald-900/20' : 'bg-slate-900 text-white hover:bg-slate-800 shadow-slate-200'}`}>
+//             Resume
+//           </button>
+//         </div>
+
+//         {/* Mobile Toggle */}
+//         <div className="flex items-center gap-4 md:hidden">
+//           <button 
+//             onClick={() => setDarkMode(!darkMode)}
+//             className={`p-2 rounded-full ${darkMode ? 'text-amber-400' : 'text-slate-600'}`}
+//           >
+//             {darkMode ? <Cpu size={20} /> : <Settings size={20} />}
+//           </button>
+//           <button 
+//             className={darkMode ? 'text-white' : 'text-slate-900'}
+//             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+//           >
+//             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+//           </button>
+//         </div>
+//       </div>
+
+//       {/* Mobile Menu */}
+//       <AnimatePresence>
+//         {isMobileMenuOpen && (
+//           <motion.div 
+//             initial={{ opacity: 0, height: 0 }}
+//             animate={{ opacity: 1, height: 'auto' }}
+//             exit={{ opacity: 0, height: 0 }}
+//             className={`md:hidden border-b overflow-hidden ${darkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-100'}`}
+//           >
+//             <div className="px-6 py-8 flex flex-col space-y-6">
+//               {navLinks.map((link) => (
+//                 <a 
+//                   key={link.name} 
+//                   href={link.href}
+//                   onClick={() => setIsMobileMenuOpen(false)}
+//                   className={`text-lg font-medium ${darkMode ? 'text-white' : 'text-slate-900'}`}
+//                 >
+//                   {link.name}
+//                 </a>
+//               ))}
+//               <button className={`px-5 py-3 rounded-xl text-center font-medium ${darkMode ? 'bg-emerald-600 text-white' : 'bg-slate-900 text-white'}`}>
+//                 Download Resume
+//               </button>
+//             </div>
+//           </motion.div>
+//         )}
+//       </AnimatePresence>
+//     </nav>
+//   );
+// };
+
+// export default function App() {
+//   const [darkMode, setDarkMode] = useState(false);
+
+//   return (
+//     <div className={`${darkMode ? 'dark bg-slate-950' : 'bg-slate-50'} min-h-screen font-sans transition-colors duration-500 selection:bg-emerald-500/30`}>
+//       <div className={`${darkMode ? 'text-slate-300' : 'text-slate-900'}`}>
+//         <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
+
+//         {/* Hero Section */}
+//         <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden">
+//           <div className={`absolute top-0 right-0 -z-10 w-1/2 h-full rounded-bl-[100px] transition-colors duration-500 ${darkMode ? 'bg-emerald-900/10' : 'bg-emerald-50/50'}`} />
+//           <div className="max-w-7xl mx-auto px-6">
+//             <div className="grid md:grid-cols-2 gap-12 items-center">
+//               <motion.div
+//                 initial={{ opacity: 0, x: -30 }}
+//                 animate={{ opacity: 1, x: 0 }}
+//                 transition={{ duration: 0.6 }}
+//               >
+//                 <motion.span 
+//                   initial={{ opacity: 0, y: 10 }}
+//                   animate={{ opacity: 1, y: 0 }}
+//                   transition={{ delay: 0.2 }}
+//                   className={`inline-block px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-6 ${darkMode ? 'bg-emerald-500/20 text-emerald-400' : 'bg-emerald-100 text-emerald-700'}`}
+//                 >
+//                   Mechanical Engineer & QA Specialist
+//                 </motion.span>
+//                 <h1 className={`text-5xl md:text-7xl font-bold leading-[1.1] mb-6 tracking-tight ${darkMode ? 'text-white' : 'text-slate-900'}`}>
+//                   Thokada <br />
+//                   <span className="text-emerald-500">Vamsi Krishna</span>
+//                 </h1>
+//                 <p className={`text-lg mb-8 max-w-lg leading-relaxed ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
+//                   Graduate Engineering Trainee with a passion for sustainable mechanical solutions, 
+//                   quality assurance, and innovative material research.
+//                 </p>
+//                 <div className="flex flex-wrap gap-4">
+//                   <a href="#contact" className={`px-8 py-4 rounded-2xl font-semibold transition-all flex items-center gap-2 shadow-xl hover:scale-105 active:scale-95 ${darkMode ? 'bg-emerald-600 text-white hover:bg-emerald-500 shadow-emerald-900/20' : 'bg-slate-900 text-white hover:bg-slate-800 shadow-slate-200'}`}>
+//                     Get in Touch <ArrowRight size={18} />
+//                   </a>
+//                   <div className="flex items-center gap-4 px-4">
+//                     <a href="https://www.linkedin.com/in/vamsi-krishna-thokada-346650296/" target="_blank" rel="noreferrer" className="p-3 text-slate-400 hover:text-emerald-500 transition-colors">
+//                       <Linkedin size={24} />
+//                     </a>
+//                     <a href="mailto:vamsikrishnavamsi2003@gmail.com" className="p-3 text-slate-400 hover:text-emerald-500 transition-colors">
+//                       <Mail size={24} />
+//                     </a>
+//                   </div>
+//                 </div>
+//               </motion.div>
+
+//               <motion.div 
+//                 initial={{ opacity: 0, scale: 0.9 }}
+//                 animate={{ opacity: 1, scale: 1 }}
+//                 transition={{ duration: 0.8, delay: 0.2 }}
+//                 className="relative"
+//               >
+//                 <div className={`aspect-square rounded-3xl shadow-2xl p-4 flex flex-col justify-center items-center relative overflow-hidden group transition-colors duration-500 ${darkMode ? 'bg-slate-900 border border-slate-800' : 'bg-white'}`}>
+//                   <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                  
+//                   {/* Author Photo with Animation */}
+//                   <motion.div 
+//                     whileHover={{ scale: 1.05 }}
+//                     className="w-full h-full rounded-2xl overflow-hidden relative z-10"
+//                   >
+//                     <img 
+//                       src="/images/profile.jpeg" 
+//                       alt="Thokada Vamsi Krishna" 
+//                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+//                       referrerPolicy="no-referrer"
+//                     />
+//                     <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+//                   </motion.div>
+                  
+//                   {/* Floating Stats */}
+//                   <motion.div 
+//                     animate={{ y: [0, -10, 0] }}
+//                     transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+//                     className={`absolute top-6 right-6 shadow-lg rounded-2xl p-4 border transition-colors duration-500 z-20 ${darkMode ? 'bg-slate-800 border-slate-700' : 'bg-white border-slate-50'}`}
+//                   >
+//                     <div className="flex items-center gap-3">
+//                       <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${darkMode ? 'bg-blue-900/30 text-blue-400' : 'bg-blue-50 text-blue-600'}`}>
+//                         <Settings size={20} />
+//                       </div>
+//                       <div>
+//                         <p className="text-xs text-slate-400 font-bold uppercase">Experience</p>
+//                         <p className={`text-sm font-bold ${darkMode ? 'text-white' : 'text-slate-900'}`}>1 Year GET</p>
+//                       </div>
+//                     </div>
+//                   </motion.div>
+
+//                   <motion.div 
+//                     animate={{ y: [0, 10, 0] }}
+//                     transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+//                     className={`absolute bottom-6 left-6 shadow-lg rounded-2xl p-4 border transition-colors duration-500 z-20 ${darkMode ? 'bg-slate-800 border-slate-700' : 'bg-white border-slate-50'}`}
+//                   >
+//                     <div className="flex items-center gap-3">
+//                       <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${darkMode ? 'bg-amber-900/30 text-amber-400' : 'bg-amber-50 text-amber-600'}`}>
+//                         <Award size={20} />
+//                       </div>
+//                       <div>
+//                         <p className="text-xs text-slate-400 font-bold uppercase">CGPA</p>
+//                         <p className={`text-sm font-bold ${darkMode ? 'text-white' : 'text-slate-900'}`}>8.5 / 10</p>
+//                       </div>
+//                     </div>
+//                   </motion.div>
+//                 </div>
+//               </motion.div>
+//             </div>
+//           </div>
+//         </section>
+
+//       {/* About Section */}
+//       <section id="about" className={`py-24 transition-colors duration-500 ${darkMode ? 'bg-slate-900' : 'bg-white'}`}>
+//         <div className="max-w-7xl mx-auto px-6">
+//           <div className="grid md:grid-cols-2 gap-16 items-center">
+//             <div className="order-2 md:order-1">
+//               <SectionHeading subtitle="Who I Am" isDark={darkMode}>About Me</SectionHeading>
+//               <p className={`text-lg leading-relaxed mb-8 ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
+//                 I am a highly motivated Mechanical Engineering graduate with a strong foundation in design, manufacturing, and automation. Currently serving as a Graduate Engineering Trainee in Quality Assurance, I bridge the gap between theoretical engineering and practical industrial excellence.
+//               </p>
+//               <p className={`text-lg leading-relaxed mb-10 ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
+//                 My career objective is to apply my technical skills to contribute to innovative projects that support efficient and sustainable engineering solutions. I believe in "Smart Work" and the power of effective collaboration.
+//               </p>
+              
+//               <div className="grid grid-cols-2 gap-6">
+//                 {SKILLS.technical.slice(0, 4).map((skill) => (
+//                   <motion.div 
+//                     key={skill} 
+//                     whileHover={{ x: 5 }}
+//                     className="flex items-center gap-3"
+//                   >
+//                     <CheckCircle2 className="text-emerald-500" size={20} />
+//                     <span className={`font-medium ${darkMode ? 'text-slate-300' : 'text-slate-700'}`}>{skill}</span>
+//                   </motion.div>
+//                 ))}
+//               </div>
+//             </div>
+            
+//             <div className="order-1 md:order-2">
+//               <div className="grid grid-cols-2 gap-4">
+//                 <div className="space-y-4">
+//                   <motion.div 
+//                     whileHover={{ scale: 1.02 }}
+//                     className={`h-48 rounded-3xl overflow-hidden ${darkMode ? 'bg-slate-800' : 'bg-slate-100'}`}
+//                   >
+//                     <img src="/images/mech1.jpeg" alt="Mechanical" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" referrerPolicy="no-referrer" />
+//                   </motion.div>
+//                   <motion.div 
+//                     whileHover={{ scale: 1.02 }}
+//                     className="h-64 bg-emerald-500 rounded-3xl flex items-center justify-center p-8 text-white shadow-lg shadow-emerald-500/20"
+//                   >
+//                     <div>
+//                       <p className="text-4xl font-bold mb-2">1+</p>
+//                       <p className="text-sm font-medium opacity-80 uppercase tracking-widest">Year Experience</p>
+//                     </div>
+//                   </motion.div>
+//                 </div>
+//                 <div className="space-y-4 pt-8">
+//                   <motion.div 
+//                     whileHover={{ scale: 1.02 }}
+//                     className={`h-64 rounded-3xl flex items-center justify-center p-8 text-white shadow-lg ${darkMode ? 'bg-emerald-700 shadow-emerald-900/20' : 'bg-slate-900 shadow-slate-200'}`}
+//                   >
+//                     <div>
+//                       <p className="text-4xl font-bold mb-2">2</p>
+//                       <p className="text-sm font-medium opacity-80 uppercase tracking-widest">Major Projects</p>
+//                     </div>
+//                   </motion.div>
+//                   <motion.div 
+//                     whileHover={{ scale: 1.02 }}
+//                     className={`h-48 rounded-3xl overflow-hidden ${darkMode ? 'bg-slate-800' : 'bg-slate-100'}`}
+//                   >
+//                     <img src="/images/mech2.jpeg" alt="Engineering" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" referrerPolicy="no-referrer" />
+//                   </motion.div>
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+//       </section>
+
+//       {/* Experience Section */}
+//       <section id="experience" className={`py-24 transition-colors duration-500 ${darkMode ? 'bg-slate-950' : 'bg-slate-50'}`}>
+//         <div className="max-w-7xl mx-auto px-6">
+//           <SectionHeading subtitle="My Journey" isDark={darkMode}>Work Experience</SectionHeading>
+          
+//           <div className="space-y-8">
+//             {EXPERIENCE.map((exp, idx) => (
+//               <motion.div 
+//                 key={idx}
+//                 initial={{ opacity: 0, y: 20 }}
+//                 whileInView={{ opacity: 1, y: 0 }}
+//                 viewport={{ once: true }}
+//                 transition={{ delay: idx * 0.1 }}
+//                 whileHover={{ y: -5 }}
+//                 className={`rounded-3xl p-8 md:p-10 shadow-sm border transition-all duration-300 ${darkMode ? 'bg-slate-900 border-slate-800 hover:border-emerald-500/50 hover:shadow-emerald-500/5' : 'bg-white border-slate-100 hover:shadow-md'}`}
+//               >
+//                 <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
+//                   <div>
+//                     <h3 className={`text-2xl font-bold ${darkMode ? 'text-white' : 'text-slate-900'}`}>{exp.role}</h3>
+//                     <p className="text-emerald-500 font-semibold">{exp.company}</p>
+//                   </div>
+//                   <div className={`px-4 py-2 rounded-xl font-bold text-sm ${darkMode ? 'bg-slate-800 text-slate-400' : 'bg-slate-50 text-slate-500'}`}>
+//                     {exp.period}
+//                   </div>
+//                 </div>
+//                 <ul className="space-y-3">
+//                   {exp.description.map((item, i) => (
+//                     <li key={i} className={`flex items-start gap-3 ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
+//                       <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" />
+//                       <span>{item}</span>
+//                     </li>
+//                   ))}
+//                 </ul>
+//               </motion.div>
+//             ))}
+//           </div>
+//         </div>
+//       </section>
+
+//       {/* Projects Section */}
+//       <section id="projects" className={`py-24 transition-colors duration-500 ${darkMode ? 'bg-slate-900' : 'bg-white'}`}>
+//         <div className="max-w-7xl mx-auto px-6">
+//           <SectionHeading subtitle="What I've Built" isDark={darkMode}>Featured Projects</SectionHeading>
+          
+//           <div className="grid md:grid-cols-2 gap-8">
+//             {PROJECTS.map((project, idx) => (
+//               <motion.div 
+//                 key={idx}
+//                 initial={{ opacity: 0, scale: 0.95 }}
+//                 whileInView={{ opacity: 1, scale: 1 }}
+//                 viewport={{ once: true }}
+//                 transition={{ delay: idx * 0.1 }}
+//                 whileHover={{ y: -10 }}
+//                 className={`group rounded-[40px] p-10 border transition-all duration-500 ${darkMode ? 'bg-slate-800 border-slate-700 hover:bg-slate-950 hover:border-emerald-500/30' : 'bg-slate-50 border-slate-100 hover:bg-slate-900'}`}
+//               >
+//                 <div className="flex justify-between items-start mb-8">
+//                   <div className={`p-4 rounded-2xl shadow-sm transition-colors ${darkMode ? 'bg-slate-700 group-hover:bg-emerald-500/20' : 'bg-white group-hover:bg-white/10'}`}>
+//                     {idx === 0 ? <Layers className={`group-hover:text-emerald-400 ${darkMode ? 'text-emerald-400' : 'text-emerald-600'}`} size={32} /> : <Settings className={`group-hover:text-emerald-400 ${darkMode ? 'text-emerald-400' : 'text-emerald-600'}`} size={32} />}
+//                   </div>
+//                   <span className="text-xs font-bold uppercase tracking-widest text-slate-400 group-hover:text-slate-500">
+//                     {project.year}
+//                   </span>
+//                 </div>
+//                 <h3 className={`text-2xl font-bold mb-4 transition-colors ${darkMode ? 'text-white group-hover:text-emerald-400' : 'text-slate-900 group-hover:text-white'}`}>
+//                   {project.title}
+//                 </h3>
+//                 <p className={`mb-8 leading-relaxed transition-colors ${darkMode ? 'text-slate-400 group-hover:text-slate-300' : 'text-slate-600 group-hover:text-slate-400'}`}>
+//                   {project.description}
+//                 </p>
+//                 <div className="flex flex-wrap gap-2">
+//                   {project.tools.map((tool) => (
+//                     <span key={tool} className={`px-3 py-1 border rounded-full text-xs font-bold transition-all ${darkMode ? 'bg-slate-700 border-slate-600 text-slate-300 group-hover:bg-emerald-500/10 group-hover:border-emerald-500/30 group-hover:text-emerald-400' : 'bg-white border-slate-200 text-slate-600 group-hover:bg-white/5 group-hover:border-white/10 group-hover:text-emerald-400'}`}>
+//                       {tool}
+//                     </span>
+//                   ))}
+//                 </div>
+//               </motion.div>
+//             ))}
+//           </div>
+//         </div>
+//       </section>
+
+//       {/* Skills Bento */}
+//       <section className={`py-24 transition-colors duration-500 ${darkMode ? 'bg-slate-950' : 'bg-slate-50'}`}>
+//         <div className="max-w-7xl mx-auto px-6">
+//           <SectionHeading subtitle="Expertise" isDark={darkMode}>Skills & Tools</SectionHeading>
+          
+//           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+//             <div className={`md:col-span-2 rounded-3xl p-10 shadow-sm border transition-colors duration-500 ${darkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-100'}`}>
+//               <h3 className={`text-xl font-bold mb-8 flex items-center gap-2 ${darkMode ? 'text-white' : 'text-slate-900'}`}>
+//                 <Cpu size={20} className="text-emerald-500" /> Technical Proficiency
+//               </h3>
+//               <div className="grid grid-cols-2 sm:grid-cols-3 gap-8">
+//                 {SKILLS.technical.map((skill) => (
+//                   <div key={skill} className="group">
+//                     <p className="text-slate-400 text-[10px] font-bold uppercase tracking-widest mb-2">Skill</p>
+//                     <p className={`font-bold transition-colors ${darkMode ? 'text-slate-200 group-hover:text-emerald-400' : 'text-slate-900 group-hover:text-emerald-600'}`}>{skill}</p>
+//                     <div className={`h-1 mt-3 rounded-full overflow-hidden ${darkMode ? 'bg-slate-800' : 'bg-slate-100'}`}>
+//                       <motion.div 
+//                         initial={{ width: 0 }}
+//                         whileInView={{ width: '85%' }}
+//                         viewport={{ once: true }}
+//                         transition={{ duration: 1, delay: 0.5 }}
+//                         className="h-full bg-emerald-500"
+//                       />
+//                     </div>
+//                   </div>
+//                 ))}
+//               </div>
+//             </div>
+            
+//             <motion.div 
+//               whileHover={{ scale: 1.02 }}
+//               className="bg-emerald-600 rounded-3xl p-10 text-white flex flex-col justify-between shadow-xl shadow-emerald-900/20"
+//             >
+//               <div>
+//                 <h3 className="text-xl font-bold mb-6">Soft Skills</h3>
+//                 <div className="space-y-4">
+//                   {SKILLS.soft.map((skill) => (
+//                     <div key={skill} className="flex items-center gap-3">
+//                       <div className="w-1.5 h-1.5 rounded-full bg-white/40" />
+//                       <span className="font-medium">{skill}</span>
+//                     </div>
+//                   ))}
+//                 </div>
+//               </div>
+//               <div className="mt-12 pt-8 border-t border-white/10">
+//                 <p className="text-sm font-medium opacity-80 italic">"Engineering is not only about machines, but about the people who build them."</p>
+//               </div>
+//             </motion.div>
+//           </div>
+//         </div>
+//       </section>
+
+//       {/* Education & Awards */}
+//       <section id="education" className={`py-24 transition-colors duration-500 ${darkMode ? 'bg-slate-900' : 'bg-white'}`}>
+//         <div className="max-w-7xl mx-auto px-6">
+//           <div className="grid md:grid-cols-2 gap-16">
+//             <div>
+//               <SectionHeading subtitle="Academic History" isDark={darkMode}>Education</SectionHeading>
+//               <div className="space-y-12">
+//                 {EDUCATION.map((edu, idx) => (
+//                   <div key={idx} className={`relative pl-8 border-l-2 ${darkMode ? 'border-slate-800' : 'border-slate-100'}`}>
+//                     <div className="absolute top-0 left-[-9px] w-4 h-4 rounded-full bg-emerald-500 border-4 border-white shadow-sm" />
+//                     <p className="text-xs font-bold text-emerald-500 uppercase tracking-widest mb-2">{edu.period}</p>
+//                     <h4 className={`text-xl font-bold mb-1 ${darkMode ? 'text-white' : 'text-slate-900'}`}>{edu.degree}</h4>
+//                     <p className="text-slate-500 font-medium mb-3">{edu.institution}</p>
+//                     <div className={`inline-block px-3 py-1 rounded-lg font-bold text-sm ${darkMode ? 'bg-slate-800 text-slate-300' : 'bg-slate-50 text-slate-700'}`}>
+//                       {edu.score}
+//                     </div>
+//                   </div>
+//                 ))}
+//               </div>
+//             </div>
+            
+//             <div>
+//               <SectionHeading subtitle="Recognition" isDark={darkMode}>Awards & Certs</SectionHeading>
+//               <div className="space-y-6">
+//                 {[
+//                   { icon: <Award size={24} />, title: "2nd Prize - Vista 2k23", desc: "National-Level Technical Competition (Technical Quiz)" },
+//                   { icon: <BookOpen size={24} />, title: "NPTEL Certification", desc: "Advanced Machining Processes (Score: 68.82/100)" },
+//                   { icon: <Briefcase size={24} />, title: "Lead Departmental Fest", desc: "Coordinated college events with faculty and external vendors." }
+//                 ].map((item, i) => (
+//                   <motion.div 
+//                     key={i}
+//                     whileHover={{ x: 10 }}
+//                     className={`rounded-2xl p-6 border flex gap-5 transition-colors ${darkMode ? 'bg-slate-800 border-slate-700' : 'bg-slate-50 border-slate-100'}`}
+//                   >
+//                     <div className={`w-12 h-12 rounded-xl shadow-sm flex items-center justify-center text-emerald-500 shrink-0 ${darkMode ? 'bg-slate-700' : 'bg-white'}`}>
+//                       {item.icon}
+//                     </div>
+//                     <div>
+//                       <h4 className={`font-bold mb-1 ${darkMode ? 'text-white' : 'text-slate-900'}`}>{item.title}</h4>
+//                       <p className="text-sm text-slate-500">{item.desc}</p>
+//                     </div>
+//                   </motion.div>
+//                 ))}
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+//       </section>
+
+//       {/* Contact Section */}
+//       <section id="contact" className={`py-24 transition-colors duration-500 relative overflow-hidden ${darkMode ? 'bg-slate-950' : 'bg-slate-900 text-white'}`}>
+//         <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/10 blur-[120px] rounded-full" />
+//         <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-500/10 blur-[120px] rounded-full" />
+        
+//         <div className="max-w-7xl mx-auto px-6 relative z-10">
+//           <div className="max-w-3xl mx-auto text-center mb-16">
+//             <h2 className="text-4xl md:text-5xl font-bold mb-6">Let's build something <span className="text-emerald-400">great together.</span></h2>
+//             <p className="text-slate-400 text-lg">
+//               I'm always open to discussing innovative engineering projects or opportunities in mechanical design and quality assurance.
+//             </p>
+//           </div>
+          
+//           <div className="grid md:grid-cols-3 gap-8 mb-20">
+//             {[
+//               { icon: <Mail size={28} />, label: "Email Me", value: "vamsikrishnavamsi2003@gmail.com", href: "mailto:vamsikrishnavamsi2003@gmail.com" },
+//               { icon: <Phone size={28} />, label: "Call Me", value: "+91 7995357662", href: "tel:7995357662" },
+//               { icon: <MapPin size={28} />, label: "Location", value: "Visakhapatnam, Andhra Pradesh", href: null }
+//             ].map((item, i) => (
+//               <motion.div 
+//                 key={i}
+//                 whileHover={{ y: -5 }}
+//                 className={`backdrop-blur-sm border border-white/10 rounded-3xl p-8 text-center transition-colors ${darkMode ? 'bg-slate-900/50 hover:bg-slate-800/50' : 'bg-white/5 hover:bg-white/10'}`}
+//               >
+//                 <div className="w-14 h-14 bg-emerald-500/20 rounded-2xl flex items-center justify-center text-emerald-400 mx-auto mb-6">
+//                   {item.icon}
+//                 </div>
+//                 <p className="text-slate-400 text-sm font-bold uppercase tracking-widest mb-2">{item.label}</p>
+//                 {item.href ? (
+//                   <a href={item.href} className="text-lg font-bold hover:text-emerald-400 transition-colors">{item.value}</a>
+//                 ) : (
+//                   <p className="text-lg font-bold">{item.value}</p>
+//                 )}
+//               </motion.div>
+//             ))}
+//           </div>
+          
+//           <div className="flex flex-col md:flex-row justify-between items-center pt-12 border-t border-white/10 gap-8">
+//             <p className="text-slate-500 text-sm">
+//               © {new Date().getFullYear()} Thokada Vamsi Krishna. All rights reserved.
+//             </p>
+//             <div className="flex items-center gap-6">
+//               <a href="https://www.linkedin.com/in/vamsi-krishna-thokada-346650296/" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-white transition-colors">
+//                 <Linkedin size={20} />
+//               </a>
+//               <a href="#" className="text-slate-400 hover:text-white transition-colors">
+//                 <Download size={20} />
+//               </a>
+//             </div>
+//           </div>
+//         </div>
+//       </section>
+//     </div>
+//   </div>
+//   );
+// }
