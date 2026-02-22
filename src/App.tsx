@@ -332,7 +332,7 @@ export default function App() {
                     className="w-full h-full rounded-2xl overflow-hidden relative z-10"
                   >
                     <img 
-                      src="https://picsum.photos/seed/vamsi/800/800" 
+                      src="/images/profile.jpeg" 
                       alt="Thokada Vamsi Krishna" 
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                       referrerPolicy="no-referrer"
@@ -412,7 +412,7 @@ export default function App() {
                     whileHover={{ scale: 1.02 }}
                     className={`h-48 rounded-3xl overflow-hidden ${darkMode ? 'bg-slate-800' : 'bg-slate-100'}`}
                   >
-                    <img src="https://picsum.photos/seed/mech1/600/600" alt="Mechanical" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" referrerPolicy="no-referrer" />
+                    <img src="/images/mech1.jpeg" alt="Mechanical" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" referrerPolicy="no-referrer" />
                   </motion.div>
                   <motion.div 
                     whileHover={{ scale: 1.02 }}
@@ -438,7 +438,7 @@ export default function App() {
                     whileHover={{ scale: 1.02 }}
                     className={`h-48 rounded-3xl overflow-hidden ${darkMode ? 'bg-slate-800' : 'bg-slate-100'}`}
                   >
-                    <img src="https://picsum.photos/seed/mech2/600/600" alt="Engineering" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" referrerPolicy="no-referrer" />
+                    <img src="/images/mech2.jpeg" alt="Engineering" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" referrerPolicy="no-referrer" />
                   </motion.div>
                 </div>
               </div>

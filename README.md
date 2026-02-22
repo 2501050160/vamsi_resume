@@ -1,20 +1,15 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Image Assets Documentation
 
-# Run and deploy your AI Studio app
+This document lists the images used in the Thokada Vamsi Krishna Portfolio and their respective purposes.
 
-This contains everything you need to run your app locally.
+## Local Image Assets
 
-View your app in AI Studio: https://ai.studio/apps/f67825ee-0bc1-4b19-b32c-b24debc71843
+The application is configured to use local images stored in the `/public/images/` directory.
 
-## Run Locally
+| Purpose | Local Path | Recommended Dimensions |
+|---------|------------|------------------------|
+| **Author Photo** | `/public/images/profile.jpeg` | 800x800px |
+| **Mechanical Context 1** | `/public/images/mech1.jpeg` | 600x600px |
+| **Mechanical Context 2** | `/public/images/mech2.jpeg` | 600x600px |
 
-**Prerequisites:**  Node.js
-
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+**Note:** Please ensure you upload your images to the `/public/images/` folder with the exact filenames listed above for them to appear in the portfolio.
